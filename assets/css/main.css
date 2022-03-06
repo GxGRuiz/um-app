@@ -1,0 +1,29 @@
+/*#test {
+
+}*/
+
+body {
+        background-color: #032541;
+}
+
+#movie-list {
+
+}
+
+
+
+#list-container {
+    max-width: 80vw;
+    margin: 0 auto;
+}
+
+.list-item {
+    background-color: ghostwhite;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.list-item:hover{
+    background-color: #032541;
+    color: ghostwhite;
+}
