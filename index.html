@@ -12,22 +12,24 @@
 
 <body>
     <div id="list-container" class="card">
-        <h3 class="card-title">Upcoming movies</h3>
+        <h3 id="title-header" class="card-title">Upcoming movies</h3>
+        <input id="search-bar" type="text" placeholder="Search by movie title"> 
         <div class="card-body">
-        <table id="movie-list" class="table">
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Poster</th>
-                <th>Genre</th>
-                <th>Release Date</th>
-            </tr> 
-            </thead>
-            <tbody id="test">
+            <div class="table-responsive">  
+                 <table id="movie-list" class="table">
+                 <thead>
+                 <tr>
+                     <th>Title</th>
+                     <th>Poster</th>
+                     <th>Genre</th>
+                     <th>Release Date</th>
+                 </tr> 
+                 </thead>
+                 <tbody id="test">
 
-            </tbody>
-        </table>   
-
+                 </tbody>
+                 </table>   
+           </div>
         </div>
     </div>
     
@@ -45,7 +47,6 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
