@@ -3,13 +3,18 @@ let listItems = document.getElementsByClassName("list-item");
 let movieModalContent = document.getElementById("movieModalContent");
 let movieModalLabel = document.getElementById("movieModalLabel");
 let searchBar = document.getElementById("search-bar");
+let today = new Date();
+let dd = String(today.getDate()).padStart(2, '0');
+let mm = String(today.getMonth() + 1).padStart(2, '0');
+let yyyy = today.getFullYear();
 
-let base, baseUrl, posterSizes, backdropSizes, genres;
+today = yyyy + '-' + mm + '-' + dd;
+
+let base, baseUrl, posterSizes, backdropSizes, genres, pages;
 
 fetch("https://api.themoviedb.org/3/configuration?api_key=1f54bd990f1cdfb230adb312546d765d").then(function (response) {
   response.text().then(function (text) {
     base = JSON.parse(text);
-    console.log(base);
     baseUrl = base.images.secure_base_url;
     posterSizes = base.images.poster_sizes;
     backdropSizes = base.images.backdrop_sizes;
@@ -25,35 +30,36 @@ fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=1f54bd990f1cdfb230a
 
 //use a for loop to get multiple pages
 for (let i = 1; i < 5; i++) {
-  
-  fetch("https://api.themoviedb.org/3/discover/movie?api_key=1f54bd990f1cdfb230adb312546d765d&language=en-US&sort_by=primary_release_date.asc&include_adult=false&include_video=false&page=" + i + "&primary_release_date.gte=2022-03-07").then(function (response) {
+
+  fetch("https://api.themoviedb.org/3/discover/movie?api_key=1f54bd990f1cdfb230adb312546d765d&language=en-US&sort_by=primary_release_date.asc&include_adult=false&include_video=false&page=" + i + "&primary_release_date.gte=" + today).then(function (response) {
     response.text().then(function (text) {
 
       let movies = JSON.parse(text).results;
-
+      
       movies.forEach(element => {
 
         let movGenres = "";
         let imgSrc = null;
         (element.poster_path == null) ? imgSrc = baseUrl + backdropSizes[0] + element.backdrop_path: imgSrc = baseUrl + posterSizes[0] + element.poster_path;
         element.genre_ids.forEach(genre_id => movGenres += genres.find((genre) => genre.id === genre_id)['name'] + ", ");
-
+        movGenres = movGenres.slice(0, -2);
         
+        if (movGenres.length == 0){movGenres = "<b>GENRE UNAVAILABLE";}
 
-        let imgElmt = `<img class='movie-poster' src=` + imgSrc + `>`;
+        let imgElmt;
+
+        (/null/.test(imgSrc)) ? imgElmt = "<b>IMAGE UNAVAILABLE</b>": imgElmt = `<img class='movie-poster' src=` + imgSrc + `>`;
+
 
         test.innerHTML += `<tr data-bs-toggle='modal' data-bs-target='#movieModal' class='list-item'>
                             <td>` + element.title + `<input class='movie-title' type='hidden' value='` + element.title + `'></td>
-                            <td>`
-                               + imgElmt + `
+                            <td>` + imgElmt + `
                                <input class='movie-overview' type='hidden' value='` + element.overview + `'>
                             </td>
                             <td>` + movGenres + `<input class='movie-genre' type='hidden' value='` + movGenres + `'></td>
                             <td>` + element.release_date + `<input class='movie-release-date' type='hidden' value='` + element.release_date + `'></td>
                         </tr>`;
       });
-
-      //console.log(text);
 
       [...listItems].forEach(listItem => {
 
@@ -72,9 +78,14 @@ for (let i = 1; i < 5; i++) {
                                                  <div><h6>Genre</h6>` + movieGenres + `</div>
                                                  <div><h6>Release Date</h6>` + movieReleaseDate + `</div>
                                             </div> `;
-          document.getElementById('movie-details').prepend(moviePoster.cloneNode(true));
 
-
+          if (moviePoster != null) {
+            document.getElementById('movie-details').prepend(moviePoster.cloneNode(true));
+          } else {
+            let b = document.createElement("b")
+            b.innerHTML = 'IMAGE UNAVAILABLE';
+            document.getElementById('movie-details').prepend(b);
+          }
 
         })
 

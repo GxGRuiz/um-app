@@ -1,7 +1,3 @@
-/*#test {
-
-}*/
-
 body {
         background-color: #032541;
 }
@@ -15,17 +11,9 @@ body {
       overflow: scroll;
 }
 
-/*#movieModal {
-    
-}*/
-
 #title-header {
     padding: 1rem 1rem;
 }
-
-/*#movieModal img {
-    float: left;
-}*/
 
 #movie-details {
     display: grid;
