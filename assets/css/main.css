@@ -1,0 +1,38 @@
+body {
+        background-color: #032541;
+}
+
+#search-bar {
+    width: fit-content;
+    margin: 1rem 1rem;
+}
+
+#movie-list {
+      overflow: scroll;
+}
+
+#title-header {
+    padding: 1rem 1rem;
+}
+
+#movie-details {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    row-gap: 20px;
+}
+
+#list-container {
+    max-width: 80vw;
+    margin: 0 auto;
+}
+
+.list-item {
+    background-color: ghostwhite;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.list-item:hover{
+    background-color: #032541;
+    color: ghostwhite;
+}
