@@ -8,4 +8,4 @@ Third-party libraries in use:
 
 Bootstrap 5.1.3 CSS/JS
 
-Used to ensure responsiveness and handling of modal box functionality
+- Used to ensure responsiveness and handling of modal box functionality
