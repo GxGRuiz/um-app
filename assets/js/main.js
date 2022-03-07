@@ -1,4 +1,4 @@
-let test = document.getElementById("test");
+let tableContent = document.getElementById("table-content");
 let listItems = document.getElementsByClassName("list-item");
 let movieModalContent = document.getElementById("movieModalContent");
 let movieModalLabel = document.getElementById("movieModalLabel");
@@ -51,7 +51,7 @@ for (let i = 1; i < 5; i++) {
         (/null/.test(imgSrc)) ? imgElmt = "<b>IMAGE UNAVAILABLE</b>": imgElmt = `<img class='movie-poster' src=` + imgSrc + `>`;
 
 
-        test.innerHTML += `<tr data-bs-toggle='modal' data-bs-target='#movieModal' class='list-item'>
+        tableContent.innerHTML += `<tr data-bs-toggle='modal' data-bs-target='#movieModal' class='list-item'>
                             <td>` + element.title + `<input class='movie-title' type='hidden' value='` + element.title + `'></td>
                             <td>` + imgElmt + `
                                <input class='movie-overview' type='hidden' value='` + element.overview + `'>
