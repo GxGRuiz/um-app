@@ -1,21 +1,40 @@
-fetch("https://api.themoviedb.org/3/configuration?api_key=1f54bd990f1cdfb230adb312546d765d").then(function (response) {
+class ApiCall {
+
+   constructor(url){
+      this.url = url; 
+   }
+
+   call(){
+    fetch(this.url).then(function (response) {
+      response.text().then(function (text) {
+        return JSON.parse(text);
+      });
+    });
+   }
+
+}
+
+let urlvars = new ApiCall("https://api.themoviedb.org/3/configuration?api_key=1f54bd990f1cdfb230adb312546d765d");
+console.log(urlvars.call());
+
+/*fetch("https://api.themoviedb.org/3/configuration?api_key=1f54bd990f1cdfb230adb312546d765d").then(function (response) {
   response.text().then(function (text) {
     base = JSON.parse(text);
     baseUrl = base.images.secure_base_url;
     posterSizes = base.images.poster_sizes;
     backdropSizes = base.images.backdrop_sizes;
   });
-});
+});*/
 
-fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=1f54bd990f1cdfb230adb312546d765d&language=en-US").then(function (response) {
+/*fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=1f54bd990f1cdfb230adb312546d765d&language=en-US").then(function (response) {
   response.text().then(function (text) {
     base = JSON.parse(text);
     genres = base.genres;
   });
-});
+});*/
 
 //use a for loop to get multiple pages
-for (let i = 1; i < 5; i++) {
+/*for (let i = 1; i < 5; i++) {
 
   fetch("https://api.themoviedb.org/3/discover/movie?api_key=1f54bd990f1cdfb230adb312546d765d&language=en-US&sort_by=primary_release_date.asc&include_adult=false&include_video=false&page=" + i + "&primary_release_date.gte=" + today).then(function (response) {
     response.text().then(function (text) {
@@ -80,4 +99,4 @@ for (let i = 1; i < 5; i++) {
     });
   });
 
-}
+}*/
